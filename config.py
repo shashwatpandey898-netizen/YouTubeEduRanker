@@ -3,5 +3,5 @@ import os
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-key-for-eduranker'
     # API Key provided in project request
-    GEMINI_API_KEY = "AIzaSyDTrUUAk-mVC9DAcvhuSGb1_efgyPwoaiY"
+    GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
     DEBUG = True
