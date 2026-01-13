@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-0">Analysis Results: <span class="text-primary">{{ topic }}</span></h2>
+        <span class="badge bg-secondary">{{ decay_info.category }} Decay (λ={{ decay_info.rate }})</span>
+        <span class="badge bg-light text-dark border ms-2">User Level: {{ user_level }}/5</span>
+    </div>
+    <a href="/" class="btn btn-outline-secondary btn-sm">New Analysis</a>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        {% for item in ranked_videos %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Score Column -->
+                    <div
+                        class="col-md-2 text-center border-end d-flex flex-column align-items-center justify-content-center">
+                        <div
+                            class="score-badge {% if item.score.total > 80 %}score-high{% elif item.score.total > 50 %}score-med{% else %}score-low{% endif %} mb-2">
+                            {{ item.score.total }}
+                        </div>
+                        <small class="text-muted fw-bold">ETAS SCORE</small>
+                    </div>
+
+                    <!-- Content Column -->
+                    <div class="col-md-7 ps-4">
+                        <h5 class="card-title fw-bold mb-1">{{ item.video.title }}</h5>
+                        <p class="text-muted small mb-2">
+                            {{ item.video.channel }} • {{ item.video.year }} • {{ "{:,}".format(item.video.views) }}
+                            views
+                        </p>
+                        <p class="card-text text-secondary mb-2">{{ item.video.description }}</p>
+
+                        <div class="d-flex gap-2">
+                            <span class="badge bg-light text-dark border">Diff: {{ item.video.difficulty }}/5</span>
+                            <span class="badge bg-light text-dark border">Comments: {{ item.score.C }}/100</span>
+                        </div>
+                    </div>
+
+                    <!-- Analytics Column -->
+                    <div class="col-md-3 bg-light rounded p-3">
+                        <h6 class="small fw-bold text-uppercase text-muted mb-3">Component Breakdown</h6>
+
+                        <div class="d-flex justify-content-between small mb-1">
+                            <span>Engagement (E)</span> <span>{{ item.score.E }}</span>
+                        </div>
+                        <div class="component-bar mb-2">
+                            <div class="component-fill fill-E" style="width: {{ item.score.E }}%"></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between small mb-1">
+                            <span>Relevance (R)</span> <span>{{ item.score.R }}</span>
+                        </div>
+                        <div class="component-bar mb-2">
+                            <div class="component-fill fill-R" style="width: {{ item.score.R }}%"></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between small mb-1">
+                            <span>Content (C)</span> <span>{{ item.score.C }}</span>
+                        </div>
+                        <div class="component-bar mb-2">
+                            <div class="component-fill fill-C" style="width: {{ item.score.C }}%"></div>
+                        </div>
+
+                        <div class="text-end mt-2">
+                            <small class="text-muted" style="font-size: 0.7rem">Weights: E:{{item.score.weights[0]}}
+                                R:{{item.score.weights[1]}} C:{{item.score.weights[2]}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Expanded Details (Accordion style or simple footer) -->
+            <div class="card-footer bg-white border-top-0">
+                <small class="text-muted"><strong>AI Comment Analysis:</strong> Quality Score {{ item.score.C/10 }}/10
+                    based on sentiment & clarity signals.</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

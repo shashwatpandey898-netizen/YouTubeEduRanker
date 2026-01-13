@@ -1,0 +1,73 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #34495e;
+    --accent: #1abc9c;
+    --bg-light: #f8f9fa;
+    --font-main: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--primary);
+    background-color: #f4f6f8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.card {
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.score-badge {
+    font-family: var(--font-mono);
+    font-weight: bold;
+    font-size: 1.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+}
+
+.score-high { background-color: #10b981; }
+.score-med { background-color: #f59e0b; }
+.score-low { background-color: #ef4444; }
+
+.component-bar {
+    height: 6px;
+    border-radius: 3px;
+    background-color: #e9ecef;
+    margin-top: 4px;
+    overflow: hidden;
+}
+.component-fill {
+    height: 100%;
+}
+.fill-E { background-color: #3b82f6; }
+.fill-R { background-color: #8b5cf6; }
+.fill-C { background-color: #f472b6; }
+.fill-S { background-color: #f59e0b; }
+.fill-D { background-color: #64748b; }
+
+.academic-header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
